@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { Header } from "./components/Header";
+import { GlobalStyle } from "./styles/global";
 
-function App() {
-  return <h1>Hello world!</h1>;
-}
-
-export default App;
+export const App = () => {
+  return (
+    <>
+      <Header />
+      <GlobalStyle />
+    </>
+  );
+};
