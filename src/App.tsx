@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { Dashboard } from "./components/Dashboard";
+import { Header } from "./components/Header";
+import { TransactionTable } from "./components/TransactionsTable";
+import { GlobalStyle } from "./styles/global";
 
-function App() {
-  return <h1>Hello world!</h1>;
-}
-
-export default App;
+export const App = () => {
+  return (
+    <>
+      <Header />
+      <Dashboard />
+      <TransactionTable />
+      <GlobalStyle />
+    </>
+  );
+};
