@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import { Container } from "./styles";
+import axios from "axios";
+import { api } from "../../services/api";
 
 export const TransactionTable = () => {
+  useEffect(() => {
+    api("/transactions").then((res) => console.log(res.data));
+  }, []);
+
   return (
     <Container>
       <table>
@@ -21,7 +28,7 @@ export const TransactionTable = () => {
             <td>13/04/2021</td>
           </tr>
           <tr>
-            <td>Alugule</td>
+            <td>Aluguel</td>
             <td className="outcome">R$ 1.100</td>
             <td>Venda</td>
             <td>19/04/2021</td>
