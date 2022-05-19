@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { useTransactions } from "../../hooks/useTransaction";
 import { Container } from "./styles";
-import axios from "axios";
-import { api } from "../../services/api";
-
-interface Transaction {
-  id: number;
-  title: string;
-  amount: number;
-  createdAt: string;
-  category: string;
-  type: string;
-}
 
 export const TransactionTable = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    api("/transactions").then((res) => setTransactions(res.data.transactions));
-  }, []);
+  const { transactions } = useTransactions();
 
   return (
     <Container>
@@ -32,8 +18,8 @@ export const TransactionTable = () => {
         </thead>
 
         <tbody>
-          {transactions.map(({ title, amount, category, createdAt, type }) => (
-            <tr>
+          {transactions.map(({ id, title, amount, category, createdAt, type }) => (
+            <tr key={id}>
               <td>{title}</td>
               <td className={type}>
                 {new Intl.NumberFormat("pt-BR", {
@@ -42,11 +28,7 @@ export const TransactionTable = () => {
                 }).format(amount)}
               </td>
               <td>{category}</td>
-              <td>
-                {new Intl.DateTimeFormat("pt-BR", {}).format(
-                  new Date(createdAt)
-                )}
-              </td>
+              <td>{new Intl.DateTimeFormat("pt-BR", {}).format(new Date(createdAt))}</td>
             </tr>
           ))}
         </tbody>
